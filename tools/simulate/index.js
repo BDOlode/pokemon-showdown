@@ -56,9 +56,10 @@ const RejectionTracker = new class {
 		this.unhandled.push({ reason, promise });
 	}
 
-	onRejectionHandled(promise) {
-		this.unhandled.splice(this.unhandled.findIndex(u => u.promise === promise), 1);
-	}
+        onRejectionHandled(promise) {
+                const i = this.unhandled.findIndex(u => u.promise === promise);
+                if (i >= 0) this.unhandled.splice(i, 1);
+        }
 
 	onExit(code) {
 		let i = 0;
